@@ -1,0 +1,152 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starting Page</title>
+</head>
+<body>
+  <h1>welcome the app is working</h1>
+</body>
+</html> -->
+
+<%- include("./partials/NavBar.ejs") %>
+
+<style>
+  body {
+    background-color: #ecf5ff;
+  }
+
+  .drop-down {
+    z-index: 10;
+    position: absolute;
+    width: 1300px;
+    height: 500px;
+    top: -600px;
+    left: 100px;
+    background-color: red;
+    padding: 30px 30px;
+    border-radius: 10px;
+    /* animation-delay: 5s; */
+    /* animation-iteration-count: infinite; */
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .drop-down button {
+    margin-top: 20px;
+  }
+
+  .drop-down-animation {
+    animation-name: animate-drop-down;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes animate-drop-down {
+    0% {
+      transform: translateY(0);
+    }
+    80% {
+      transform: translateY(800px);
+    }
+    100% {
+      transform: translateY(750px);
+    }
+  }
+
+</style>
+
+<div class = "index-section">
+
+  <div class="drop-down" id="select-me">
+    <form action="addQuestion" method = "POST">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Question ??</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your question here" name = "title">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Your comments and suggestions</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" placeholder="your comments and suggetions" name = "body"></textarea>
+      </div>
+      <button class = "btn btn-primary" type="submit">Add Question here</button>
+      
+    </form>
+    <button class = "btn btn-warning Go-back">Go back</button>
+  </div>
+
+
+  <div class = "container">
+    <div class = "row main-heading">
+      <div class = "col-lg-4">
+        <h1>Recent Questions</h1>
+      </div>
+      <div class = "col-lg-6 tbx">
+        <form action="" method="get" class = "my-form">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control opp" placeholder="Search questions here" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </form>
+      </div>
+      <div class = "col-lg-2 add-question-btn">
+        <!-- <form action="/addQuestion" method = "POST"> -->
+          <button class = "btn btn-primary btn-block btn-lg" type = "submit">add Question</button>
+        <!-- </form> -->
+      </div>
+    </div>
+    <div class = "row">
+      
+      <% for (var i = 0; i < sets.length; i++)  { %>
+
+        <div class = "col-md-8">
+          <a href="/Question/<%= sets[i].title %>">
+            <div class = "my-card">
+              <h4><%- sets[i].title %></h4>
+              <p><%- sets[i].body.substring(0, 16) + "..." %></p>
+            </div>
+          </a>
+        </div>
+
+      <% } %> 
+
+      
+    </div>
+  </div>
+</div>
+
+</body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script> 
+
+    const input = document.querySelector(".opp");
+    const form = document.querySelector(".my-form");
+
+    //enter key event...........
+    input.addEventListener("keydown", (e) => {
+      if (e.keyCode === 13) {
+        // alert("went here")
+        form.action = "/Question/" + input.value
+      }
+    })
+
+    //addQuestion event.............
+    const addQuestionButton = document.querySelector(".main-heading button");
+    const dropDown = document.querySelector("#select-me");
+    const goBack = document.querySelector(".Go-back");
+    
+    addQuestionButton.addEventListener("click", () => {
+      dropDown.classList.toggle("drop-down-animation");
+    })
+
+    goBack.addEventListener("click", () => {
+      dropDown.classList.toggle("drop-down-animation");
+    })
+
+  </script>
+</html>
+
+
+

@@ -1,0 +1,112 @@
+.container-fluid {
+  padding-left: 200px;
+  padding-right: 200px;
+  margin: 0;
+  background-color: #343a40;
+}
+
+.nav-item {
+  padding: 0 10px;
+}
+
+/* -----------------------------  Index page Styles  ------------------------------ */
+
+  .index-section {
+    /* background-color: #282828; */
+    
+    height: 100%;
+  }
+
+  .main-heading {
+    color: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .index-section .tbx {
+    padding-top: 10px;
+  }
+
+  .add-question-btn {
+    padding-top: 5px;
+  }
+
+  .index-section .col-md-8 {
+    /* padding-right: 300px; */
+    padding-bottom: 50px;
+    padding-left: 20px;
+  }
+
+  .index-section .col-md-4 {
+    padding: 50px ;
+    /* padding-left: 100px; */
+  }
+
+  .index-section a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .index-section .my-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 30px;
+    box-shadow: 1px 1px 10px 0 rgb(32,33,36, 0.1);
+    transition-duration: .4s;
+  }
+
+  .index-section h4,p {
+    transition-property: background-color color;
+    transition-duration: .4s;
+  }
+
+  .index-section .my-card h4 {
+    padding-bottom: 20px;
+
+  }
+
+  .index-section .my-card:hover {
+    background-color: black;
+  }
+
+  .index-section .my-card:hover > h4 {
+    color: red;
+  }
+
+  .index-section .my-card:hover > p {
+    color: white;
+  }
+
+/* -----------------------------    About page styles    -------------------------------------- */
+
+
+.con-1 {
+  /* background-color: #55bdca; */
+  padding-top: 50px;
+  /* padding-bottom: 50px; */
+  height: 100vh;
+  background-image: url(https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60);
+  background-size: 100%;
+  background-position: center;
+  color: #55bdca
+}
+
+.con-1 h1 {
+  padding-bottom: 30px;
+}
+
+
+/* ----------------------------- Question page styles ---------------------------------------- */
+
+
+.question-section .my-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 30px;
+  box-shadow: 1px 1px 10px 0 rgb(32,33,36, 0.1);
+  transition-duration: .4s;
+}
+
+.question-section .row {
+  padding-top: 100px;
+}

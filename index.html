@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <style>
+      .drop-down {
+        position: absolute;
+        width: 1300px;
+        height: 500px;
+        top: -600px;
+        left: 100px;
+        background-color: red;
+        padding: 30px 30px;
+        border-radius: 10px;
+        /* animation-delay: 5s; */
+        /* animation-iteration-count: infinite; */
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      .drop-down button {
+        margin-top: 30px;
+      }
+
+      .drop-down-animation {
+        animation-name: animate-drop-down;
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes animate-drop-down {
+        0% {
+          transform: translateY(0);
+        }
+        80% {
+          transform: translateY(700px);
+        }
+        100% {
+          transform: translateY(650px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="click-me">click me to see droup down</button>
+    <div class="drop-down" id="select-me">
+      <form action="">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Question ??</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter your question here">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Your comments and suggestions</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" placeholder="your comments and suggetions"></textarea>
+        </div>
+        <button class = "btn btn-primary">Add Question here</button>
+        <button class = "btn btn-warning" class = "Go-back">Go back</button>
+
+      </form>
+    </div>
+  </body>
+  <script>
+    const btn = document.querySelector(".click-me");
+    const goBack = document.querySelector(".Go-back");
+    const dropDown = document.querySelector("#select-me");
+    btn.addEventListener("click", () => {
+      // alert("went")
+      // dropDown.style.animation-name = "";
+      dropDown.classList.toggle("drop-down-animation");
+    });
+
+    goBack.addEventListener("click", () => {
+      dropDown.classList.toggle("drop-down-animation");
+    })
+  </script>
+</html>
