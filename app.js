@@ -1,6 +1,58 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+
 const app = express();
+
+mongoose.connect(process.env.URL, { useUnifiedTopology: true,  useNewUrlParser: true  }, (err) => {
+  if (err) console.log("error occured");
+  else console.log("connected successfully");
+})
+
+var Schema = mongoose.Schema({
+  Question: String,
+  Answer: String
+})
+
+var problem = mongoose.model("problem", Schema);     //collection name problem
+
+
+//-----------------------------------mongo db CURD operations SYNTAXES written here ----------------
+
+// var problem_2 = new problem({                  ===> create a new model set
+//   Question: "this is question 2",
+//   Answer: "this is its answer"
+// })
+
+// problem_2.save((err, data) => {            ===> save the set
+//   if (err) console.log(err);
+//   else console.log("okok");
+// })
+
+// problem.find((err, data) => {      ===> print the whole array of objects
+//   if (data) console.log(data);
+//   else console.log(err);
+// })
+
+
+// problem.deleteMany({}, (data) => {   ===> deletes all the documents inside the collection
+//   console.log(data);
+// })
+
+
+// problem.find((err, data) => {                      //  ===>  iterate though the array 
+//   if (data) {
+//     for (var i = 0; i < data.length; i++) {
+//       console.log(data[i].Question);
+//       console.log(data[i].Answer);
+//     }
+//   }
+// })
+
+
+// ---------------------------------ACTUAL PROGRAMMING WRITTEN HERE--------------------------
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -9,18 +61,7 @@ app.use(express.static("public"));
 var dataObjects = {
 
   sets: [
-    {
-      title: "Question 1",
-      body: "Best answer for question 1"
-    },
-    {
-      title: "Question 2",
-      body: "suggessions for question 2"
-    },
-    {
-      title: "Question 3",
-      body: "suggession for question 3"
-    }
+
   ]
 
 }
@@ -28,7 +69,31 @@ var dataObjects = {
 
 app.get("/" ,(req, res) => {
 
-  res.render("index", dataObjects);
+  dataObjects.sets = [];
+
+  problem.find((err, data) => {
+
+    let tempSets;
+    console.log(data);
+    if (data) {
+      // console.log(dataObjects.sets[0])
+      for (var i = 0; i < data.length; i++) {
+        console.log("data length :\t" + data.length);
+        tempSets ={
+          title: data[i].Question,
+          body: data[i].Answer
+        }
+        dataObjects.sets.push(tempSets);
+      }
+
+      // console.log(dataObjects.sets);
+      res.render("index", dataObjects);  
+    } else if (err) {
+      res.send("data base error occured");
+    }
+  })
+
+  
 
 })
 
@@ -70,10 +135,12 @@ app.get("/mission", (req, res) => {
 
 app.get("/refresh", (req, res) => {
   dataObjects.sets = []
-  res.redirect("/");
+  problem.deleteMany({}, () => {
+    res.redirect("/");
+  })
 })
 
-// --------------------------------------------post requests written here ----------------------
+// --------------------------------------------post requests written here (add question)----------------------
 
 app.post("/addQuestion", (req, res) => {
   const title = req.body.title;
@@ -82,16 +149,26 @@ app.post("/addQuestion", (req, res) => {
   console.log(title);
   console.log("body:\t" , body);
 
-  const tempObject = {
-    title: title,
-    body: body
-  }
+  const nextProblem = new problem({
+    Question: title,
+    Answer: body
+  })
 
-  dataObjects.sets.push(tempObject);
+  nextProblem.save((err, data) => {
+    if (data) {
+      const tempObject = {
+        title: title,
+        body: body
+      }
+      dataObjects.sets.push(tempObject);
+      res.redirect("/");
+    } else if (err) {
+      res.send("sorry database error occured");
+    }
+  });
 
-  res.redirect("/");
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("app is running on port 3000")
 })
