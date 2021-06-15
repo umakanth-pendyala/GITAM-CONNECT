@@ -93,11 +93,11 @@ body {
   }
 
   .index-section .my-card:hover {
-    background-color: black;
+    background-color: #B1040E;
   }
 
   .index-section .my-card:hover > h4 {
-    color: red;
+    color: #fff;
   }
 
   .index-section .my-card:hover > p {
