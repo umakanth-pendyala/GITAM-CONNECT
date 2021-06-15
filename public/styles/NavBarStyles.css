@@ -1,9 +1,9 @@
-.container-fluid {
+/* .container-fluid {
   padding-left: 200px;
   padding-right: 200px;
   margin: 0;
   background-color: #343a40;
-}
+} */
 /*           ///ahhh this is real shit....big issue
 html {
   height: 100%;
@@ -13,16 +13,16 @@ body {
   height: 100%;
 } */
 
-.nav-item {
+/* .nav-item {
   padding: 0 10px;
-}
+} */
 
 /* .navbar-brand h1 {
   font-size: 4rem ;
   color: red;
 } */
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   .navbar-brand {
     font-size: 5rem;
     color: red;
@@ -32,7 +32,7 @@ body {
     font-size: 3rem;
   }
 
-}
+} */
 
 
 
@@ -93,11 +93,11 @@ body {
   }
 
   .index-section .my-card:hover {
-    background-color: black;
+    background-color: #B1040E;
   }
 
   .index-section .my-card:hover > h4 {
-    color: red;
+    color: #fff;
   }
 
   .index-section .my-card:hover > p {
